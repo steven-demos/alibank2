@@ -1,0 +1,47 @@
+<project name="ALIBank2" default="dist" basedir=".">
+	
+	<property name="src" location="src" />
+	<property name="lib" location="lib" />
+	<property name="build" location="build" />
+	<property name="dist" location="dist" />
+	<property name="webcontent" location="WebContent" />
+
+	<target name="clean"
+	    description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}"/>
+		<delete dir="${dist}/latest"/>
+	</target>		
+	
+	<target name="init" depends="clean">
+		<!-- Create the time stamp -->
+		<tstamp/>
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}"/>
+		<copy todir="${build}">
+			<fileset dir="${webcontent}"/>
+		</copy>
+		<mkdir dir="${build}/WEB-INF/classes" />
+	</target>
+	
+	<target name="compile" depends="init"
+	    description="compile the source">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac includeantruntime="false" classpath="${lib}/servlet-api.jar;${lib}/jsp-api.jar" 
+			srcdir="${src}" destdir="${build}/WEB-INF/classes"/>
+	</target>
+	
+	<target name="dist" depends="compile"
+	    description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/war"/>
+		<mkdir dir="${dist}/latest" />
+	
+		<!-- Put everything in ${build} into the ALIBank2-${DSTAMP}.war file -->
+		<jar jarfile="${dist}/war/ALIBank2-${DSTAMP}.war" basedir="${build}"/>
+		<copy file="${dist}/war/ALIBank2-${DSTAMP}.war" tofile="${dist}/latest/ALIBank2.war" />
+	</target>
+	
+
+	
+</project>
