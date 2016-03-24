@@ -7,11 +7,19 @@
 <title>Welcome to ALI Bank</title>
 </head>
 <body>
+<center>
 <h1>Welcome to ALI Bank</h1>
 <form method="POST" action="ProcessLogin">
-	Username: <input type="text" name="username"/><br>
-	Password: <input type="password" name="password"/><br>
+	<table>
+		<tr>
+			<td>Username: </td><td><input type="text" name="username"/></td>
+		</tr>
+		<tr>
+			<td>Password:</td><td><input type="password" name="password"/></td>
+		</tr>
+	</table>
 	<input type="submit" value="Log In"/>
 </form>
+</center>
 </body>
 </html>
